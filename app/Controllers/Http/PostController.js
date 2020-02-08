@@ -26,6 +26,28 @@ class PostController {
 		session.flash({ notification: 'Data Berhasil Disimpan' })
 		return response.route('posts.index')
 	}
+
+	// view edit post
+	async edit({ request, response, params, view }) {
+		const id 	= params.id
+		const post 	= await Post.find(id)
+
+		return view.render('posts.edit', { post: post })
+	}
+
+	// update data post
+	async update ({ request, response, view, params, session }) {
+		const id 	= params.id
+		const post 	= await Post.find(id)
+
+		post.title 		= request.input('title')
+		post.content	= request.input('content')
+		await post.save()
+
+		session.flash({ notification: 'Data Berhasil Diupdate'})
+		return response.route('posts.index')
+	}
+	
 }
 
 module.exports = PostController
