@@ -1,6 +1,6 @@
 'use strict'
 
-const User = user('App/Models/User')
+const User = use('App/Models/User')
 const { validate } = use('Validator')
 
 class RegisterController {
@@ -19,7 +19,7 @@ class RegisterController {
 			password: 'required'
 		}
 
-		const message = {
+		const messages = {
 			'name.required': 'Nama Lengkap Tidak Boleh Kosong',
 			'email.required': 'Email Tidak Boleh Kosong',
 			'email.unique': 'Alamat Email Sudah Terdaftar',
@@ -32,7 +32,7 @@ class RegisterController {
 		* Validation Failed
 		*/
 		if (validation.fails()) {
-			session.withErros(validation.messages()).flashExcept(['password'])
+			session.withErrors(validation.messages()).flashExcept(['password'])
 			return response.redirect('back')
 		}
 

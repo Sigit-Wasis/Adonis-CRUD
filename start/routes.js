@@ -23,3 +23,6 @@ Route.post('/posts/store', 'PostController.store').as('posts.store')
 Route.get('/posts/edit/:id', 'PostController.edit').as('posts.edit')
 Route.post('/posts/update/:id', 'PostController.update').as('posts.update')
 Route.get('/posts/delete/:id', 'PostController.delete').as('posts.delete')
+
+Route.get('/register', 'Auth/RegisterController.index').as('register.index')
+Route.post('/register', 'Auth/RegisterController.store').as('register.store')
