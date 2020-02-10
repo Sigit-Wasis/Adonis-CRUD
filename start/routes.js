@@ -24,5 +24,8 @@ Route.get('/posts/edit/:id', 'PostController.edit').as('posts.edit')
 Route.post('/posts/update/:id', 'PostController.update').as('posts.update')
 Route.get('/posts/delete/:id', 'PostController.delete').as('posts.delete')
 
+Route.get('login', 'Auth/LoginController.index').as('login.index')
+Route.post('login', 'Auth/LoginController.check').as('login.check')
+Route.get('logout', 'Auth/LoginController.logout').as('logout')
 Route.get('/register', 'Auth/RegisterController.index').as('register.index')
 Route.post('/register', 'Auth/RegisterController.store').as('register.store')
