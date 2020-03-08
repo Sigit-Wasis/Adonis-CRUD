@@ -40,4 +40,4 @@ Route.get('logout', 'Auth/LoginController.logout').as('logout').middleware(['Aut
 Route.get('/register', 'Auth/RegisterController.index').as('register.index').middleware(['RedirectIfAuthenticated'])
 Route.post('/register', 'Auth/RegisterController.store').as('register.store').middleware(['RedirectIfAuthenticated'])
 
-Route.get('/dashboard', 'DashboardController.index').as('dashboard')
+Route.get('/dashboard', 'DashboardController.index').as('dashboard').middleware(['Authenticate'])

@@ -9,11 +9,10 @@ class Authenticate {
    * @param {Request} ctx.request
    * @param {Function} next
    */
-  async handle ({ request }, next) {
+  async handle ({ response, auth }, next) {
     // call next to advance the request
     try {
       await auth.check()
-      return "hello"
     } catch (error) {
       return response.route('login.index')
     }
