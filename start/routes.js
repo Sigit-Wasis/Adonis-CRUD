@@ -27,12 +27,12 @@ Route.post('/posts/update/:id', 'PostController.update').as('posts.update')
 Route.get('/posts/delete/:id', 'PostController.delete').as('posts.delete')
 
 // ADD KAJIAN
-Route.get('/kajians', 'PostController.index').as('kajians.index')
-Route.get('/kajians/create', 'PostController.create').as('kajians.create')
-Route.post('/kajians/store', 'PostController.store').as('kajians.store')
-Route.get('/kajians/edit/:id', 'PostController.edit').as('kajians.edit')
-Route.post('/kajians/update/:id', 'PostController.update').as('kajians.update')
-Route.get('/kajians/delete/:id', 'PostController.delete').as('kajians.delete')
+Route.get('/kajians', 'KajianController.index').as('kajians.index')
+Route.post('/kajians/store', 'KajianController.store').as('kajians.store')
+Route.get('/kajians/show/:id', 'KajianController.show').as('kajians.show')
+Route.get('/kajians/edit/:id', 'KajianController.edit').as('kajians.edit')
+Route.post('/kajians/update/:id', 'KajianController.update').as('kajians.update')
+Route.get('/kajians/delete/:id', 'KajianController.delete').as('kajians.delete')
 
 Route.get('login', 'Auth/LoginController.index').as('login.index').middleware(['RedirectIfAuthenticated'])
 Route.post('login', 'Auth/LoginController.check').as('login.check').middleware(['RedirectIfAuthenticated'])

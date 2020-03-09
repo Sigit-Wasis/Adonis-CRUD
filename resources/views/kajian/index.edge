@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css">
+    <link rel="stylesheet" href="//cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css">
+    <title>Kajian Singkat - Sigit Wasis Subekti</title>
+</head>
+<body style="background: #edf2f7">
+
+<div class="container-fluid" style="margin-top: 50px">
+    <div class="row">
+        <div class="col-md-3">
+            <ul class="list-group">
+                <li class="list-group-item active">MAIN MENU</li>
+                <a href="{{ route('dashboard') }}" class="list-group-item" style="color: #212529;"><i class="fa fa-tachometer-alt"></i> Dashboard</a>
+                <li class="list-group-item"><i class="fa fa-user-circle"></i> My Profile</li>
+                <a href="{{ route('logout') }}" class="list-group-item" style="color: #212529;"><i class="fa fa-sign-out-alt"></i> Logout</a>
+            </ul>
+        </div>
+
+        <div class="col-md-9">
+            <div class="card">
+                <div class="card-header">
+                    DATA KAJIAN
+                </div>
+                <div class="card-body">
+                    @if(flashMessage('notification'))
+                        <div class="alert alert-success">{{ flashMessage('notification') }}</div>
+                    @endif
+                    <a href="{{ route('posts.create') }}" class="btn btn-success btn-sm" data-toggle="modal" data-target="#exampleModal" style="margin-bottom: 15px">
+                        <i class="fa fa-plus-circle"></i>Tambah
+                    </a>
+                    <table class="table table-hovered table-striped table-bordered" id="myTable">
+                        <thead>
+                            <tr>
+                                <td style="text-align: center;"><b>Judul Kajian</td>
+                                <td style="text-align: center;"><b>Penceramah</td>
+                                <td style="text-align: center;"><b>Aksi</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @each(kajian in kajians)
+                            <tr>
+                                <td> {{ kajian.judul_kajian }} </td>
+                                <td> {{ kajian.pemateri }} </td>
+                                <td class="text-center">
+                                    <a href="{{ route('kajians.show', { id : kajian.id }) }}" class="btn btn-sm btn-info">Show</a>
+                                    <a href="{{ route('kajians.edit', { id : kajian.id }) }}" class="btn btn-sm btn-primary">Edit</a>
+                                    <a href="{{ route('kajians.delete', { id : kajian.id }) }}" class="btn btn-sm btn-danger">Hapus</a>
+                                </td>
+                            </tr>
+                            @endeach
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modals Add Kajian -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h6 class="modal-title" id="exampleModalLabel">Tambah Kajian</h6>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form action="{{ route('kajians.store') }}" method="POST">
+                    {{ csrfField() }}
+                    <div class="form-group">
+                        <label>Judul Kajian</label>
+                        <input class="form-control" type="text" name="judul_kajian" placeholder="masukkan judul kajian">
+                    </div>
+                    <div class="form-group">
+                        <label>Penceramah</label>
+                        <input class="form-control" type="text" name="pemateri" placeholder="masukkan nama penceramah">
+                    </div>
+                    <div class="form-group">
+                        <label>Isi Kajian</label>
+                        <textarea name="isi_kajian" rows="10" class="form-control" type="text" placeholder="masukkan isi kajian"></textarea>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Kembali</button>
+                        <button type="submit" class="btn btn-primary btn-sm"><i class="fa fa-save"></i> Simpan Kajian</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="//cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+<script>
+    $(document).ready( function () {
+        $('#myTable').DataTable();
+    } );
+</script>
+</body>
+</html>
